@@ -34,6 +34,8 @@
 #include <asm/unistd.h>
 #include <asm/uaccess.h>*/
 
+static void proc_nfc_feature(void);
+
 struct nqx_platform_data {
 	unsigned int irq_gpio;
 	unsigned int en_gpio;
@@ -130,7 +132,7 @@ static const char* feature_src = "/system/etc/permissions/android.hardware.nfc.x
 bool contains_nfc = false;
 struct proc_dir_entry *nfcManifest = NULL;
 
-void proc_nfc_feature(){
+static void proc_nfc_feature(void){
         mm_segment_t fs;
 
 	if(nfcManifest)
