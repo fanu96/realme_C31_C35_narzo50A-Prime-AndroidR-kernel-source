@@ -7,7 +7,7 @@ on:
       defconfig:
         description: 'Kernel defconfig name (e.g., rmx3263_defconfig)'
         required: true
-        default: 'rmx3263_defconfig'
+        default: 'sprd_sharkl5Pro_defconfig'
 
 jobs:
   build:
