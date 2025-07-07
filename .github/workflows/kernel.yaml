@@ -24,7 +24,7 @@ jobs:
       CCACHE_EXEC: /usr/bin/ccache
 
       # Toolchain Paths
-      CLANG_BASE: ${{ github.workspace }}/toolchains/clang-r383902b
+      CLANG_BASE: ${{ github.workspace }}/toolchains/clang-r416183b
       GCC_64_BASE: ${{ github.workspace }}/toolchains/gcc-14.3
       GCC_32_BASE: ${{ github.workspace }}/toolchains/gcc-14.3
 
@@ -95,9 +95,9 @@ jobs:
           cd "${{ github.workspace }}/toolchains"
           
           echo "--> Downloading Clang..."
-          mkdir -p clang-r383902b
-          wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/0e9e7035bf8ad42437c6156e5950eab13655b26c/clang-r383902b.tar.gz -O clang.tar.gz
-          tar -xf clang.tar.gz -C clang-r383902b && rm clang.tar.gz
+          mkdir -p clang-r416183b
+          wget -q https://android.googlesource.com/platform//prebuilts/clang/host/linux-x86/+archive/b669748458572622ed716407611633c5415da25c/clang-r416183b.tar.gz -O clang.tar.gz
+          tar -xf clang.tar.gz -C clang-r416183b && rm clang.tar.gz
           
           echo "--> Downloading GCC 14.3..."
           mkdir -p gcc-14.3
