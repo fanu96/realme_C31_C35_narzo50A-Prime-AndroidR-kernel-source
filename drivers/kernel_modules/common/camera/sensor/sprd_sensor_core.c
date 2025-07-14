@@ -27,7 +27,7 @@
 #include <linux/slab.h>
 #include <linux/sched.h>
 #include <linux/version.h>
-#include <../../../../../bsp/kernel/kernel4.14/include/linux/hardware_info.h>//added by zhangxiangyang_HQ
+#include <linux/hardware_info.h>
 #include <linux/i2c.h>
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0))
