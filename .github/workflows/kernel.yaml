@@ -153,7 +153,7 @@ jobs:
           sprd_flash_drv:drivers/kernel_modules/common/camera/flash/flash_drv:NONE
           sprd_sensor:drivers/kernel_modules/common/camera/sensor:NONE
           sprd_camera:drivers/kernel_modules/common/camera/core:NONE
-          flash_ic_ocp8132:drivers/kernel_modules/common/camera/flash/ocp8132:NONE
+          flash_ic_ocp8132:drivers/kernel_modules/common/camera/flash/ocp8135b:NONE
           flash_ic_ocp8137:drivers/kernel_modules/common/camera/flash/ocp8137:NONE
           flash_ic_sc2703:drivers/kernel_modules/common/camera/flash/sc2703s:NONE
           sprd_cpp:drivers/kernel_modules/common/camera/cpp:NONE
@@ -225,7 +225,7 @@ jobs:
           sprd_flash_drv:drivers/kernel_modules/common/camera/flash/flash_drv
           sprd_sensor:drivers/kernel_modules/common/camera/sensor
           sprd_camera:drivers/kernel_modules/common/camera/core
-          flash_ic_ocp8132:drivers/kernel_modules/common/camera/flash/ocp8132
+          flash_ic_ocp8132:drivers/kernel_modules/common/camera/flash/ocp8135b
           flash_ic_ocp8137:drivers/kernel_modules/common/camera/flash/ocp8137
           flash_ic_sc2703:drivers/kernel_modules/common/camera/flash/sc2703s
           sprd_cpp:drivers/kernel_modules/common/camera/cpp
