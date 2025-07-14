@@ -139,7 +139,7 @@ jobs:
             CROSS_COMPILE="${{ env.CROSS_COMPILE }}" \
             CROSS_COMPILE_ARM32="${{ env.CROSS_COMPILE_ARM32 }}" \
             CLANG_TRIPLE="aarch64-none-linux-gnu-" \
-            Image modules dtbs || exit 1 # <--- MODIFIED: Added dtbs and dtbos targets
+            Image modules
 
           echo -e "\n[INFO]: KERNEL BUILD FINISHED..!"
           ccache -s
@@ -278,34 +278,6 @@ jobs:
           KERNEL_VERSION=$(cat ${{ github.workspace }}/out/include/generated/utsrelease.h | awk '{print $3}' | tr -d '"')
           touch "${{ github.workspace }}/modules_out/lib/modules/$KERNEL_VERSION/modules.builtin.modinfo"
           depmod -a -b "${{ github.workspace }}/modules_out" "$KERNEL_VERSION"
-
-      # <--- ADDED SECTION: Package the DTB and DTBO files --->
-      - name: Package DTB and DTBO files
-        run: |
-          echo "[INFO]: Packaging DTB and DTBO files..."
-          mkdir -p "${{ github.workspace }}/build/dtb"
-          
-          # The standard location for UNISOC DTBs is arch/arm64/boot/dts/sprd
-          DTB_SOURCE_DIR="${{ github.workspace }}/out/arch/${{ env.ARCH }}/boot/dts/sprd"
-          DTB_DEST_DIR="${{ github.workspace }}/build/dtb"
-          
-          if [ -d "$DTB_SOURCE_DIR" ]; then
-              echo "--> Found DTB directory at $DTB_SOURCE_DIR"
-              find "$DTB_SOURCE_DIR" -name "*.dtb" -exec cp {} "$DTB_DEST_DIR/" \;
-              find "$DTB_SOURCE_DIR" -name "*.dtbo" -exec cp {} "$DTB_DEST_DIR/" \;
-          else
-              echo "::warning:: Standard UNISOC DTB directory not found. Searching all of boot/dts..."
-              find "${{ github.workspace }}/out/arch/${{ env.ARCH }}/boot/dts" -name "*.dtb" -exec cp {} "$DTB_DEST_DIR/" \;
-              find "${{ github.workspace }}/out/arch/${{ env.ARCH }}/boot/dts" -name "*.dtbo" -exec cp {} "$DTB_DEST_DIR/" \;
-          fi
-
-          if [ -z "$(ls -A $DTB_DEST_DIR)" ]; then
-              echo "::error::No DTB or DTBO files were found after the build. Check the build logs."
-              exit 1
-          else
-              echo "--> DTB/DTBO files successfully packaged."
-              ls -lR $DTB_DEST_DIR
-          fi
 
       - name: Package Kernel and All Modules
         run: |
