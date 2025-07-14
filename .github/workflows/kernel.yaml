@@ -96,7 +96,7 @@ jobs:
           
           echo "--> Downloading Clang..."
           mkdir -p clang-r383902b1
-          wget -q https://android.googlesource.com/platform//prebuilts/clang/host/linux-x86/+archive/4c6fbc28d3b078a5308894fc175f962bb26a5718/clang-r383902b11.tar.gz -O clang.tar.gz
+          wget -q https://android.googlesource.com/platform//prebuilts/clang/host/linux-x86/+archive/4c6fbc28d3b078a5308894fc175f962bb26a5718/clang-r383902b1.tar.gz -O clang.tar.gz
           tar -xf clang.tar.gz -C clang-r383902b1 && rm clang.tar.gz
           
           echo "--> Downloading GCC 14.3..."
