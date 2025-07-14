@@ -766,7 +766,7 @@ static int bq2560x_charger_set_status(struct bq2560x_charger_info *info,
 	int ret = 0;
 	u32 input_vol;
 
-	if (val == CM_FAST_CHARGE_OVP_ENABLE_CMD) {
+	if (val == CM_FAST_CHARGE_ENABLE_CMD) {
 		ret = bq2560x_charger_set_ovp(info, BQ2560X_FCHG_OVP_9V);
 		if (ret) {
 			dev_err(info->dev, "failed to set fast charge 9V ovp\n");
