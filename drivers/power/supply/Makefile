@@ -108,3 +108,4 @@ obj-$(CONFIG_FAST_CHARGER_SC2730) += sc2730_fast_charger.o
 obj-$(CONFIG_CHARGER_BQ25910) += bq25910_charger.o
 obj-$(CONFIG_CHARGER_SGM41512) += sgm41512_chg.o
 obj-$(CONFIG_CHARGER_SGM4154X) += sgm4154x_chg.o
+obj-y += missing_stubs.o
