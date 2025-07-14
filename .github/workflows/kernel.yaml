@@ -19,9 +19,6 @@ jobs:
       ARCH: arm64
       KBUILD_BUILD_USER: '@fanuverse'
       
-      # Ccache Flags
-      USE_CCACHE: 1
-      CCACHE_EXEC: /usr/bin/ccache
 
       # Toolchain Paths
       CLANG_BASE: ${{ github.workspace }}/toolchains/clang-r383902b1
@@ -29,7 +26,7 @@ jobs:
       GCC_32_BASE: ${{ github.workspace }}/toolchains/gcc-14.3
 
       # Main Compiler and Cross-Compile Variables
-      CC: "ccache clang"
+      CC: "clang"
       CROSS_COMPILE: "${{ github.workspace }}/toolchains/gcc-14.3/bin/aarch64-none-linux-gnu-"
       CROSS_COMPILE_ARM32: "${{ github.workspace }}/toolchains/gcc-14.3/bin/arm-none-linux-gnueabihf-"
       
@@ -71,13 +68,6 @@ jobs:
           path: ${{ github.workspace }}/toolchains
           key: ${{ runner.os }}-toolchains-v3
 
-      - name: Cache ccache
-        uses: actions/cache@v4
-        with:
-          path: ~/.ccache
-          key: ${{ runner.os }}-ccache-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-ccache-
 
       - name: Setup System Dependencies
         run: |
@@ -86,7 +76,7 @@ jobs:
           sudo apt-get install -y --fix-missing \
             git device-tree-compiler lz4 xz-utils zlib1g-dev zip make gcc g++ \
             python3 python-is-python3 libncurses-dev flex bison gperf libssl-dev \
-            libelf-dev kmod pahole zstd libyaml-dev ccache
+            libelf-dev kmod pahole zstd libyaml-dev
 
       - name: Download and Set up Toolchains
         if: steps.cache-toolchains.outputs.cache-hit != 'true'
@@ -108,15 +98,11 @@ jobs:
           chmod +x ${{ env.CLANG_BASE }}/bin/*
           chmod +x ${{ env.GCC_64_BASE }}/bin/*
 
-      - name: Set up PATH and ccache
+      - name: Set up PATH
         run: |
           echo "${{ env.CLANG_BASE }}/bin" >> $GITHUB_PATH
           echo "${{ env.GCC_64_BASE }}/bin" >> $GITHUB_PATH
           
-          echo "[INFO] Configuring ccache..."
-          ccache -M 5G
-          ccache -z
-
       - name: Build Kernel, Modules, and DTBs
         run: |
           echo -e "\n[INFO]: KERNEL BUILD STARTED..!\n"
@@ -142,7 +128,6 @@ jobs:
             Image modules
 
           echo -e "\n[INFO]: KERNEL BUILD FINISHED..!"
-          ccache -s
 
       - name: Install In-Tree Kernel Modules
         run: |
